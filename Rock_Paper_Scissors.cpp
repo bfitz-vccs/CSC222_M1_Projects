@@ -3,10 +3,52 @@
 #include <string>
 
 int player_option();
+int winner(int player_choice, int computer_choice);
+void score_updater(int winner, int &player_wins, int &computer_wins);
+std::string tournament_winner(int player_wins, int computer_wins);
+
+int player_score = 0;
+int computer_score = 0;
 
 int main(){
-    int result = player_option();
-    std::cout << "Result: " << result << std::endl;
+    int player_input;
+    do{
+        std::cout << "Welcome to the Rock, Paper Scissors tournament against the computer!" << std::endl;
+        player_input = player_option();
+
+        std::random_device engine;
+        std::uniform_int_distribution<int>choice(1, 3);
+        int computer_choice = choice(engine);
+
+        switch(computer_choice){
+            case 1:
+                std::cout << "Computer chose rock.";
+                break;
+            case 2:
+                std::cout << "Computer chose paper.";
+                break;
+            case 3:
+                std::cout << "Computer chose scissors.";
+                break;
+        }
+
+        int result = winner(player_input, computer_choice);
+        switch(result){
+            case 1:
+                std::cout << " Player wins!" << std::endl;;
+                break;
+            case 2:
+                std::cout << " Computer wins!" << std::endl;
+                break;
+            case 3:
+                std::cout << " Draw!" << std::endl;
+                break;
+        }
+
+
+    }
+    while (player_input != 0);
+
     
     return 0;
 }
@@ -37,3 +79,54 @@ int player_option(){
     }
         
     }
+
+int winner(int player, int computer){
+    int outcome;
+    if (player == computer){
+        outcome = 3;
+    }
+    else if (player == 1 && computer == 2){
+        outcome = 2;
+    }
+    else if (player == 2 && computer == 3){
+        outcome = 2;
+    }
+    else if (player == 3 && computer == 1){
+        outcome = 2;
+    }
+    else if (player == 2 && computer == 1){
+        outcome = 1;
+    }
+    else if (player == 3 && computer == 2){
+        outcome = 1;
+    }
+    else if (player == 1 && computer == 3){
+        outcome = 1;
+    }
+    return outcome;
+}
+
+void score_updater(int winner, int &player_wins, int &computer_wins){
+    switch (winner){
+        case 1:
+            player_wins++;
+            break;
+        case 2:
+            computer_wins++;
+            break;
+    }
+}
+
+std::string tournament_winner(int player_wins, int computer_wins){
+    std::string winner;
+    if (player_wins > computer_wins){
+        winner = "Player wins the tournament!";
+    }
+    else if (player_wins < computer_wins){
+        winner = "Computer wins the tournament!";
+    }
+    else{
+        winner = "The player's score and the computer's score are tied, it's a draw!";
+    }
+    return winner;
+}
