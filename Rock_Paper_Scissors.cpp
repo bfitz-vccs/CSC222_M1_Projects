@@ -5,7 +5,7 @@
 int player_option();
 int winner(int player_choice, int computer_choice);
 void score_updater(int winner, int &player_wins, int &computer_wins);
-std::string tournament_winner(int player_wins, int computer_wins);
+void tournament_winner(int player_wins, int computer_wins);
 
 int player_score = 0;
 int computer_score = 0;
@@ -44,12 +44,13 @@ int main(){
                 std::cout << " Draw!" << std::endl;
                 break;
         }
-
+        score_updater(result, player_score, computer_score);
 
     }
     while (player_input != 0);
 
-    
+    std::cout << "\n" << std::endl;
+    tournament_winner(player_score, computer_score);
     return 0;
 }
 
@@ -117,16 +118,16 @@ void score_updater(int winner, int &player_wins, int &computer_wins){
     }
 }
 
-std::string tournament_winner(int player_wins, int computer_wins){
-    std::string winner;
+void tournament_winner(int player_wins, int computer_wins){
+    std::cout << "Player score: " << player_wins << std::endl;
+    std::cout << "Computer score: " << computer_wins << std::endl;
     if (player_wins > computer_wins){
-        winner = "Player wins the tournament!";
+        std::cout << "Player wins the tournament!" << std::endl;
     }
     else if (player_wins < computer_wins){
-        winner = "Computer wins the tournament!";
+        std::cout << "Computer wins the tournament!" << std::endl;
     }
     else{
-        winner = "The player's score and the computer's score are tied, it's a draw!";
+        std::cout << "The player's score and the computer's score are tied, it's a draw!" << std::endl;
     }
-    return winner;
 }
