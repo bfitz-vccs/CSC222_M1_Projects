@@ -11,10 +11,12 @@ int player_score = 0;
 int computer_score = 0;
 
 int main(){
+
     int player_input;
-    do{
-        std::cout << "Welcome to the Rock, Paper Scissors tournament against the computer!" << std::endl;
-        player_input = player_option();
+    std::cout << "Welcome to the Rock, Paper Scissors tournament against the computer!" << std::endl;
+    player_input = player_option();
+
+    while (player_input != 0){
 
         std::random_device engine;
         std::uniform_int_distribution<int>choice(1, 3);
@@ -35,21 +37,22 @@ int main(){
         int result = winner(player_input, computer_choice);
         switch(result){
             case 1:
-                std::cout << " Player wins!" << std::endl;;
+                std::cout << " Player wins!\n" << std::endl;;
                 break;
             case 2:
-                std::cout << " Computer wins!" << std::endl;
+                std::cout << " Computer wins!\n" << std::endl;
                 break;
             case 3:
-                std::cout << " Draw!" << std::endl;
+                std::cout << " Draw!\n" << std::endl;
                 break;
         }
         score_updater(result, player_score, computer_score);
 
-    }
-    while (player_input != 0);
+        player_input = player_option();
 
-    std::cout << "\n" << std::endl;
+    }
+
+    std::cout << std::endl;
     tournament_winner(player_score, computer_score);
     return 0;
 }
