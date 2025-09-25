@@ -13,6 +13,7 @@ const int MAX_TESTS = 100;
 
 std::string names[MAX_STUDENTS] = {};
 int test_scores[MAX_STUDENTS][MAX_TESTS] = {};
+double test_averages[MAX_STUDENTS];
 
 int main(){
 
@@ -65,4 +66,7 @@ int read_data(std::ifstream& file, std::string names_arr[], int tests_arr[][MAX_
     }
     return student_count;
 }
+ 
+void grade_report(std::string names_arr[], double averages_arr[]){
     
+}
